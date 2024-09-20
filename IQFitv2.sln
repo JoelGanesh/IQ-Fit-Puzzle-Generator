@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQFitv2", "IQFitv2.csproj", "{16BA2E51-9807-4A81-A894-B226511BC41B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16BA2E51-9807-4A81-A894-B226511BC41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16BA2E51-9807-4A81-A894-B226511BC41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16BA2E51-9807-4A81-A894-B226511BC41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16BA2E51-9807-4A81-A894-B226511BC41B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A3B168B-FCA6-436F-9839-4BD28F48295E}
+	EndGlobalSection
+EndGlobal
