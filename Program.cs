@@ -27,6 +27,7 @@ namespace IQFit
 				game.DisplaySolution();
 			}
 			while (c != ConsoleKey.Escape);
+			Console.ReadKey();
 		}
 	}
 
