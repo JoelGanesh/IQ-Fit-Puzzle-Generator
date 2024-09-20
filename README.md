@@ -21,4 +21,4 @@ This program outputs to a console, meaning that it cannot use colors. Instead th
 | 9  | Pink        |
 
 # Disclosure
-This program is not in any way directly related to the company behind the game 'IQ Fit', Smart Games.
+This program is not in any way directly related to the company behind the game 'IQ Fit', Smart Games. Also refer to the linked license.
