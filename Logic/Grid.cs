@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//               Copyright Joël Ganesh 2024.
+// Distributed under the Boost Software License, Version 1.0.
+//    (See accompanying file LICENSE_1_0.txt or copy at
+//          https://www.boost.org/LICENSE_1_0.txt)
 
 namespace IQFit.Logic
 {
     // Represents the layout of a 10x5 grid, which is the layout used for the game.
     public class Grid()
     {
-        public int[,] grid = new int[10, 5];
+        public int?[,] grid = new int?[10, 5];
 
         // Updates the index to the first unfilled index of the board.
         public void UpdateIndex(ref int index)
         {
-            while (index < 50 && grid[index / 5, index % 5] != 0)
+            while (index < 50 && grid[index / 5, index % 5] != null)
             {
                 index++;
             }
@@ -46,7 +45,7 @@ namespace IQFit.Logic
             {
                 for (int j = 0; j < shape.GetLength(1); j++)
                 {
-                    if (shape[i, j] != 0 && grid[index0 + i, index1 + j] != 0)
+                    if (shape[i, j] != 0 && grid[index0 + i, index1 + j] != null)
                     {
                         return false;
                     }
@@ -77,7 +76,7 @@ namespace IQFit.Logic
             {
                 if (grid[i / 5, i % 5] == value)
                 {
-                    grid[i / 5, i % 5] = 0;
+                    grid[i / 5, i % 5] = null;
                     min_index = i;
                 }
             }
@@ -103,7 +102,7 @@ namespace IQFit.Logic
                 string s = "";
                 for (int i = 0; i < grid.GetLength(0); i++)
                 {
-                    s += grid[i, j] == 0 ? " " : grid[i, j] - 1;
+                    s += grid[i, j] == null ? " " : grid[i, j];
                 }
                 Console.WriteLine($"|{s}|");
             }

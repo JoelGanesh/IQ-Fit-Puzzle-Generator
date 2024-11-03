@@ -1,4 +1,9 @@
-﻿namespace IQFit.Logic
+﻿//               Copyright Joël Ganesh 2024.
+// Distributed under the Boost Software License, Version 1.0.
+//    (See accompanying file LICENSE_1_0.txt or copy at
+//          https://www.boost.org/LICENSE_1_0.txt)
+
+namespace IQFit.Logic
 {
     using static Utility;
 
@@ -7,7 +12,7 @@
         private readonly Random rand;
         private readonly int index;
 
-        public Board(Random rand, string field = "") : base()
+        public Board(Random rand, int?[,]? grid = null) : base()
         {
             this.rand = rand;
             index = 0;
@@ -16,23 +21,19 @@
             // The field parameter can be used to fill a board,
             // for instance to solve a puzzle.
             HashSet<int> set = new HashSet<int>();
-            if (field != "")
+            if (grid != null)
             {
-                string[] rows = field.Split('\n');
-                for (int j = 0; j < 5; j++)
+                this.grid = (int?[,])grid.Clone();
+                for (int i = 0; i < 50; i++)
                 {
-                    string row = rows[j];
-                    for (int i = 0; i < Math.Min(10, row.Length); i++)
+                    int? piece_id = grid[i % 10, i / 10];
+                    if (piece_id != null)
                     {
-                        char c = row[i];
-                        if (c >= '0' && c <= '9')
-                        {
-                            grid[i, j] = c - '0' + 1;
-                            set.Add(c - '0');
-                        }
+                        set.Add(piece_id.Value);
                     }
                 }
             }
+
             for (int i = 9; i >= 0; i--)
             {
                 if (set.Contains(i))

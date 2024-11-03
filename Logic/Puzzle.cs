@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//               Copyright Joël Ganesh 2024.
+// Distributed under the Boost Software License, Version 1.0.
+//    (See accompanying file LICENSE_1_0.txt or copy at
+//          https://www.boost.org/LICENSE_1_0.txt)
 
 namespace IQFit.Logic
 {
     public class Puzzle : Grid
     {
-        private readonly int[,] solution;
+        private readonly int?[,] solution;
         private readonly Random rand;
 
         public Puzzle(Random rand, Board board) : base()
@@ -17,6 +16,39 @@ namespace IQFit.Logic
             solution = board.grid;
 
             GeneratePuzzle();
+        }
+
+        public Puzzle(Random rand, Board board, int?[,] grid)
+        {
+            this.rand = rand;
+            this.grid = grid;
+            solution = board.grid;
+        }
+
+        public void Hint()
+        {
+            int retry_count = 0;
+            int i;
+            do
+            {
+                i = rand.Next(solution.Length);
+                retry_count++;
+            }
+            while (grid[i % 10, i / 10] != null && retry_count < 128);
+
+            int? c = solution[i % 10, i / 10];
+            if (c == null)
+            {
+                return;
+            }
+
+            for (int j = 0; j < 50; j++)
+            {
+                if (solution[j % 10, j / 10] == c)
+                {
+                    grid[j % 10, j / 10] = c;
+                }
+            }
         }
 
         // Generates a puzzle which has unique solution (being the board),
@@ -30,11 +62,11 @@ namespace IQFit.Logic
 
         // Helper method of the generic GeneratePuzzle method.
         // It returns a puzzle with a unique solution paired with the number of pieces used.
-        private (int[,], int) GeneratePuzzle(List<Piece> pieces)
+        private (int?[,], int) GeneratePuzzle(List<Piece> pieces)
         {
             int[] piece_ordering = Utility.GenerateOrdering(rand, pieces.Count);
             int pieces_count_min = int.MaxValue;
-            int[,] puzzle_min = new int[10, 5];
+            int?[,] puzzle_min = new int?[10, 5];
 
             for (int i = 0; i < pieces.Count; i++)
             {
@@ -47,17 +79,17 @@ namespace IQFit.Logic
                 bool is_solvable = Solvable(0, pieces);
                 if (!is_solvable)
                 {
-                    int[,] puzzle_copy;
+                    int?[,] puzzle_copy;
                     int pieces_count_copy;
                     (puzzle_copy, pieces_count_copy) = GeneratePuzzle(pieces);
                     if (++pieces_count_copy < pieces_count_min)
                     {
-                        puzzle_min = (int[,])puzzle_copy.Clone();
+                        puzzle_min = (int?[,])puzzle_copy.Clone();
                         pieces_count_min = pieces_count_copy;
                     }
                 }
 
-                int[,] puzzle_clone = (int[,])grid.Clone();
+                int?[,] puzzle_clone = (int?[,])grid.Clone();
 
                 Unfill(piece.piece_id);
                 pieces.Insert(piece_id, piece);

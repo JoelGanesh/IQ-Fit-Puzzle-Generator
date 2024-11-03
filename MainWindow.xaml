@@ -1,0 +1,37 @@
+﻿<!--               Copyright Joël Ganesh 2024.                  -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!--    (See accompanying file LICENSE_1_0.txt or copy at       -->
+<!--          https://www.boost.org/LICENSE_1_0.txt)            -->
+
+<Window x:Class="IQFit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IQFit"
+        mc:Ignorable="d"
+        Title="IQ Fit Puzzle Generator" Width="416" Height="261" ResizeMode="NoResize">
+
+    <Grid>
+        <!-- Main layout grid, with two rows: one for menu and one for UniformGrid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22" />
+            <!-- Menu row -->
+            <RowDefinition Height="*" />
+            <!-- UniformGrid row -->
+        </Grid.RowDefinitions>
+
+        <!-- Menu at the top -->
+        <Menu Grid.Row="0" Background="LightGray">
+            <MenuItem Header="Open" Click="Open_Click"/>
+            <MenuItem Header="Save" Click="Save_Click"/>
+            <Separator Width="15"/>
+            <MenuItem Header="Generate" Click="Generate_Click"/>
+            <MenuItem Header="Reload" Click="Reload_Click"/>
+            <MenuItem Header="Hint" Click="Hint_Click"/>
+            <MenuItem Header="Solution" Click="Solution_Click"/>
+        </Menu>
+
+        <UniformGrid x:Name="grid" Grid.Row="1" Rows="5" Columns="10" SizeChanged="UpdateOnSizeChanged"/>
+    </Grid>
+</Window>
